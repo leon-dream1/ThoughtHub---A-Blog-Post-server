@@ -15,11 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("./app/config"));
+// import { Server } from 'http';
+// import { seedAdmin } from './app/utils/seedAdmin';
 const port = process.env.PORT || 5000;
+//  let server: Server;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(config_1.default.database_url);
+            // seedAdmin();
             app_1.default.listen(port, () => {
                 console.log(`Example app listening on port ${port}`);
             });
@@ -30,3 +34,16 @@ function main() {
     });
 }
 main();
+// process.on('uncaughtException', () => {
+//   console.log(`uncaughtException is detected , shut done server`);
+//   process.exit(1);
+// });
+// process.on('unhandledRejection', () => {
+//   if (server) {
+//     server.close(() => {
+//       console.log(`unhandledRejection is detected , shut done server`);
+//       process.exit(1);
+//     });
+//   }
+//   process.exit(1);
+// });
