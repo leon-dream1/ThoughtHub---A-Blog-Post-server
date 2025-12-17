@@ -69,12 +69,11 @@ A secure, scalable RESTful API for a blogging platform featuring role-based acce
    ```bash
    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
    cd your-repo-name
-   ```bash
 
 2. **Install Dependencies:**
    ```bash
    npm install
-   ```bash
+
 
 3. **Environment Configuration: Create a .env file in the root directory and add:**
    ```bash
@@ -82,17 +81,10 @@ A secure, scalable RESTful API for a blogging platform featuring role-based acce
    DATABASE_URL=your_mongodb_uri
    JWT_ACCESS_SECRET=your_jwt_secret
    NODE_ENV=development
-   ```bash
 
 4. **Run the Application:**
    ```bash
-   # Development mode
-     npm run dev
-
-  # Build for production
-     npm run build
-   ```bash
-
+     npm run start:dev
 
 ---
 
