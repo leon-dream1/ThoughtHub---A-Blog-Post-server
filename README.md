@@ -1,63 +1,111 @@
-<!-- # Car Store Backend
+# 📝 Blog Platform Backend
 
-A backend application for managing car listings, built with TypeScript, Express.js, MongoDB, and Zod. This project uses the modular pattern for better scalability and maintainability.
+A secure, scalable RESTful API for a blogging platform featuring role-based access control (RBAC), built with **TypeScript**, **Node.js**, and **MongoDB**.
 
-# Features of the Car Store Backend Project
+---
 
-- Add new car entries with complete details such as brand, model, year, price, category, description, quantity, and stock status.
-- Fetch all car listings stored in the database, including detailed information like price, category, availability, and more.
-- Fetch details of a specific car by its unique identifier (carId).
-- Update car details (e.g., price, quantity) based on its ID.
-- Permanently remove a car entry from the database using its ID
-- Customers can place an order for a car by providing their email, car ID, quantity, and total price.
-- Provides the total revenue generated from all car orders.
-- Codebase is organized into modules such as routes, controllers, services, models, and utils for better maintainability and scalability.
-- Strongly-typed backend application ensuring fewer runtime errors and robust type-checking during development.
-- Input validation using Zod for requests such as car creation, updates, and order placement.
-- Efficient data storage and retrieval using Mongoose as the ODM for MongoDB.
+## 🚀 Features
 
-# Prerequisites
+### **1. User Roles & Permissions**
+- **User:**
+  - Register and Login.
+  - Create, Update, and Delete their own blogs.
+- **Admin:**
+  - Block users (stops them from creating/modifying content).
+  - Delete **any** blog post for moderation.
+  - *Note: Admins cannot update blogs.*
 
-Ensure you have the following installed on your local system:
+### **2. Public Blog API**
+- Search blogs by **Title** or **Content**.
+- Sort blogs by specific fields (e.g., `createdAt`, `title`).
+- Filter blogs by **Author ID**.
+- Supports `asc` and `desc` sorting orders.
 
-- Node.js (v16 or above)
-- npm (v8 or above)
-- MongoDB (Running locally or a cloud instance like MongoDB Atlas)
+### **3. Security & Validation**
+- **JWT Authentication:** Secure login system using JSON Web Tokens.
+- **Bcrypt:** Password hashing to ensure data security.
+- **Zod Validation:** Strict request body validation for all endpoints.
+- **Role Guards:** Middleware to protect routes based on user roles.
 
-# Getting Started
+---
 
-Follow these steps to set up and run the project locally:
+## 🛠️ Tech Stack
 
-# 1. Clone the Repository
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Framework:** [Express.js](https://expressjs.com/)
+- **Database:** [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+- **Validation:** [Zod](https://zod.dev/)
+- **Auth:** JWT (JSON Web Token)
 
-```
-git clone https://github.com/leon-dream1/car-store-backend.git
-cd car-store-backend
-```
+---
 
-# 2. Install Dependencies
+## 🚦 API Endpoints
 
-Install all required dependencies using npm:
+### **Authentication**
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Register a new user |
+| `POST` | `/api/auth/login` | Authenticate user & get token |
 
-```
-npm install
+### **Blog Management**
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/blogs` | User | Create a blog |
+| `GET` | `/api/blogs` | Public | Get all blogs (Search/Sort/Filter) |
+| `PATCH` | `/api/blogs/:id` | User | Update own blog |
+| `DELETE` | `/api/blogs/:id` | User | Delete own blog |
 
-```
+### **Admin Actions**
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `PATCH` | `/api/admin/users/:userId/block` | Admin | Block a user |
+| `DELETE` | `/api/admin/blogs/:id` | Admin | Delete any blog |
 
-# 2. Configure Environment Variables
+---
 
-Create a .env file in the root directory and add the following environment variables:
+## ⚙️ Installation & Setup
 
-```
-PORT=5000
-DATABASE_URL=your-mongodb-connection-string
-```
+1. **Clone the Project:**
+   ```bash
+   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   cd your-repo-name
+   ```bash
 
-Replace your-mongodb-connection-string with the connection URI for your MongoDB instance.
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```bash
 
-# 3. Run the Project
+3. **Environment Configuration: Create a .env file in the root directory and add:**
+   ```bash
+   PORT=5000
+   DATABASE_URL=your_mongodb_uri
+   JWT_ACCESS_SECRET=your_jwt_secret
+   NODE_ENV=development
+   ```bash
 
-```
-npm run start:dev
+4. **Run the Application:**
+   ```bash
+   # Development mode
+     npm run dev
 
-``` -->
+  # Build for production
+     npm run build
+   ```bash
+
+
+---
+
+## ⚠️ Error Handling
+
+The API implements a centralized error-handling mechanism to ensure consistent responses. Each error response follows a standard structure, providing clarity for debugging.
+
+### **Error Response Structure**
+```json
+{
+  "success": false,
+  "message": "Error message describing the issue",
+  "statusCode": 400,
+  "error": { "details": "Additional error info" },
+  "stack": "Error stack trace (visible only in development)"
+}
