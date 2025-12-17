@@ -1,4 +1,4 @@
-# Car Store Backend
+<!-- # Car Store Backend
 
 A backend application for managing car listings, built with TypeScript, Express.js, MongoDB, and Zod. This project uses the modular pattern for better scalability and maintainability.
 
@@ -60,4 +60,4 @@ Replace your-mongodb-connection-string with the connection URI for your MongoDB 
 ```
 npm run start:dev
 
-```
+``` -->
